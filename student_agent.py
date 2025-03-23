@@ -1,11 +1,13 @@
 # Remember to adjust your student ID in meta.xml
-import numpy
+import numpy as np
+import json
 import pickle
 import random
 import gym
 
-with open("q_table4.pkl", "rb") as file:
-    q_table = pickle.load(file)
+
+q_table = eval(open("q_table2.txt", "r").read())
+
 prev_action = -1
 prev_passenger = 0
 prev_destination = 0
@@ -35,8 +37,8 @@ def get_action(obs):
         if state not in q_table:
             q_table[state] = [0]*6
         q_value = [q_table[state][a] for a in range(6)]
-        maxval = numpy.max(q_value)
-        action = numpy.random.choice([a for a, val in enumerate(q_value) if val == maxval])
+        maxval = np.max(q_value)
+        action = np.random.choice([a for a, val in enumerate(q_value) if val == maxval])
         prev_action = action
         prev_passenger,prev_destination = obs[14],obs[15]
         return action
