@@ -1,5 +1,5 @@
 # Remember to adjust your student ID in meta.xml
-import numpy as np
+import numpy
 import pickle
 import random
 import gym
@@ -35,8 +35,8 @@ def get_action(obs):
         if state not in q_table:
             q_table[state] = [0]*6
         q_value = [q_table[state][a] for a in range(6)]
-        maxval = np.max(q_value)
-        action = np.random.choice([a for a, val in enumerate(q_value) if val == maxval])
+        maxval = numpy.max(q_value)
+        action = numpy.random.choice([a for a, val in enumerate(q_value) if val == maxval])
         prev_action = action
         prev_passenger,prev_destination = obs[14],obs[15]
         return action
